@@ -34,7 +34,7 @@ export interface SecretOptions {
     views?: number;
     /** Whether to burn after first view (default: true) */
     burnable?: boolean;
-    /** Base URL of the Hemmelig instance (default: 'https://hemmelig.app') */
+    /** Base URL of the Hemmelig instance (default: '''') */
     baseUrl?: string;
 }
 
@@ -125,7 +125,7 @@ function uint8ArrayToObject(arr: Uint8Array): Record<string, number> {
  *   views: 1
  * });
  *
- * console.log(result.url); // https://hemmelig.app/s/abc123#...
+ * console.log(result.url); // ''/s/abc123#...
  * ```
  */
 export async function createSecret(options: SecretOptions): Promise<CreateSecretResult> {
@@ -136,7 +136,7 @@ export async function createSecret(options: SecretOptions): Promise<CreateSecret
         expiresIn = '1d',
         views = 1,
         burnable = true,
-        baseUrl = 'https://hemmelig.app',
+        baseUrl = '''',
     } = options;
 
     // Validate expiration time

@@ -12,7 +12,7 @@ const spec = {
         version: '1.0.0',
         contact: {
             name: 'Hemmelig',
-            url: 'https://github.com/HemmeligOrg/Hemmelig.app',
+            url: 'https://github.com/danielsreichenbach/Hemmelig.app',
         },
     },
     servers: [

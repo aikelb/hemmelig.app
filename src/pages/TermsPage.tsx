@@ -25,7 +25,7 @@ export function TermsPage() {
                             These Terms of Use constitute a legally binding agreement made between
                             you, whether personally or on behalf of an entity ("you") and Hemmelig
                             Org ("Company," "we," "us," or "our"), concerning your access to and use
-                            of the https://hemmelig.app website as well as any other media form,
+                            of this application as well as any other media form,
                             media channel, mobile website or mobile application related, linked, or
                             otherwise connected thereto (collectively, the "Site").
                         </p>

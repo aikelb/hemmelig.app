@@ -33,7 +33,7 @@ The repository includes a ready-to-use `docker-compose.yml`:
 
 ```bash
 # Clone the repository
-git clone https://github.com/HemmeligOrg/Hemmelig.app.git
+git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
 
 # Edit environment variables
@@ -213,7 +213,7 @@ The Hemmelig container runs as user `bun` (non-root) for security. When using bi
 To build the Docker image locally:
 
 ```bash
-git clone https://github.com/HemmeligOrg/Hemmelig.app.git
+git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
 docker build -t hemmelig .
 ```

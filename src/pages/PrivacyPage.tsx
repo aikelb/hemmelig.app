@@ -130,7 +130,7 @@ export function PrivacyPage() {
                             If you have any questions about our privacy practices, please feel free
                             to contact us through our{' '}
                             <a
-                                href="https://github.com/HemmeligOrg/Hemmelig.app"
+                                href="https://github.com/danielsreichenbach/Hemmelig.app"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-accent hover:underline"

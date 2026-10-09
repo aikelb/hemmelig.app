@@ -1,6 +1,6 @@
 # hemmelig
 
-CLI and library for creating encrypted, self-destructing secrets via [Hemmelig](https://hemmelig.app).
+CLI and library for creating encrypted, self-destructing secrets via [Hemmelig](https://secrets.example.com).
 
 ```
  _   _                               _ _
@@ -17,7 +17,7 @@ CLI and library for creating encrypted, self-destructing secrets via [Hemmelig](
 - **Zero-knowledge** - The server never sees your plaintext secrets
 - **Self-destructing** - Secrets auto-delete after views or expiration
 - **Password protection** - Optional additional security layer
-- **Works with any Hemmelig instance** - Use hemmelig.app or self-hosted
+- **Works with any Hemmelig instance** - Use any Hemmelig instance
 
 ## Installation
 
@@ -64,7 +64,7 @@ hemmelig "internal secret" -u https://secrets.company.com
 | `-v, --views <number>`  | Max views (1-9999, default: 1)                         |
 | `-b, --burnable`        | Burn after first view (default)                        |
 | `--no-burnable`         | Don't burn until all views used                        |
-| `-u, --url <url>`       | Base URL (default: https://hemmelig.app)               |
+| `-u, --url <url>`       | Base URL (default: https://secrets.example.com)               |
 | `-h, --help`            | Show help                                              |
 | `--version`             | Show version                                           |
 
@@ -79,10 +79,10 @@ const result = await createSecret({
     expiresIn: '1h',
     views: 1,
     burnable: true,
-    baseUrl: 'https://hemmelig.app', // optional
+    baseUrl: 'https://secrets.example.com', // optional
 });
 
-console.log(result.url); // https://hemmelig.app/s/abc123#...
+console.log(result.url); // https://secrets.example.com/s/abc123#...
 console.log(result.id); // abc123
 ```
 
@@ -102,7 +102,7 @@ Creates an encrypted secret on a Hemmelig server.
 | `expiresIn` | `ExpirationKey` | `'1d'`                   | Expiration time               |
 | `views`     | `number`        | `1`                      | Max views (1-9999)            |
 | `burnable`  | `boolean`       | `true`                   | Burn on first view            |
-| `baseUrl`   | `string`        | `'https://hemmelig.app'` | Server URL                    |
+| `baseUrl`   | `string`        | `'https://secrets.example.com'` | Server URL                    |
 
 **Returns:**
 

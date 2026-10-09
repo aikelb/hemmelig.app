@@ -46,7 +46,7 @@ The chart keeps `image.tag: v7` by default, so it follows the latest v7 image. T
 
 ```bash
 # Clone the repository
-git clone https://github.com/HemmeligOrg/Hemmelig.app.git
+git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
 
 # Install the chart

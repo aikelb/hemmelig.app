@@ -23,7 +23,7 @@ export function Footer() {
                         {t('footer.api')}
                     </a>
                     <a
-                        href="https://github.com/HemmeligOrg/Hemmelig.app"
+                        href="https://github.com/danielsreichenbach/Hemmelig.app"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={linkClass}

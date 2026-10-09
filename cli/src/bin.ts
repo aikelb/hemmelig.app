@@ -37,7 +37,7 @@ Options:
   -v, --views <number>     Max views before deletion (default: 1, max: 9999)
   -b, --burnable           Burn after first view (default: true)
   --no-burnable            Don't burn after first view
-  -u, --url <url>          Base URL (default: https://hemmelig.app)
+  -u, --url <url>          Base URL (default: '')
   -h, --help               Show this help message
   --version                Show version number
 

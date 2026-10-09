@@ -1,7 +1,7 @@
 > **Note:** This fork is maintained and updated exclusively for use in my personal homelab. It is not a community project — contributions are welcome as issues or PRs, but development follows my own needs.
 
 <div align="center">
-  <img src="banner.png" alt="hemmelig" />
+  <img src="banner.svg" alt="hemmelig" />
 </div>
 
 <h1 align="center">Hemmelig - Encrypted Secret Sharing</h1>

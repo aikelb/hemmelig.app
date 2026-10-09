@@ -9,9 +9,9 @@ keywords:
   - encryption
   - security
   - sharing
-home: https://hemmelig.app
+home: https://github.com/danielsreichenbach/Hemmelig.app
 sources:
-  - https://github.com/HemmeligOrg/Hemmelig.app
+  - https://github.com/danielsreichenbach/Hemmelig.app
 maintainers:
-  - name: HemmeligOrg
-    url: https://github.com/HemmeligOrg
+  - name: danielsreichenbach
+    url: https://github.com/danielsreichenbach

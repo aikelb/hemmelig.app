@@ -19,7 +19,7 @@ The server reads 2 environment variables and nothing else:
 | Variable           | Description                                             |
 | ------------------ | ------------------------------------------------------- |
 | `HEMMELIG_API_KEY` | The API key. This variable is required                  |
-| `HEMMELIG_URL`     | The instance URL. The default is `https://hemmelig.app` |
+| `HEMMELIG_URL`     | The instance URL. The default is `https://secrets.example.com` |
 
 The server does not use the config file, the `--api-key` flag or a session from `hemmelig login`. The assistant configuration sets the credential, and you can see it in one place.
 

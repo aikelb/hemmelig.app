@@ -3,7 +3,7 @@
  * where to report a security issue.
  */
 
-const DEFAULT_CONTACT = 'https://github.com/HemmeligOrg/Hemmelig.app/security/advisories/new';
+const DEFAULT_CONTACT = 'https://github.com/danielsreichenbach/Hemmelig.app/security/advisories/new';
 
 // RFC 9116 recommends an Expires value less than one year in the future.
 const EXPIRES_IN_MS = 364 * 24 * 60 * 60 * 1000;

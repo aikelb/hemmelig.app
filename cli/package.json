@@ -37,13 +37,13 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/HemmeligOrg/Hemmelig.app.git",
+        "url": "git+https://github.com/danielsreichenbach/Hemmelig.app.git",
         "directory": "cli"
     },
     "bugs": {
-        "url": "https://github.com/HemmeligOrg/Hemmelig.app/issues"
+        "url": "https://github.com/danielsreichenbach/Hemmelig.app/issues"
     },
-    "homepage": "https://hemmelig.app",
+    "homepage": "https://github.com/danielsreichenbach/Hemmelig.app",
     "engines": {
         "node": ">=18.0.0"
     },

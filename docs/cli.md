@@ -15,12 +15,12 @@ The CLI encrypts and decrypts on your machine. The server gets only ciphertext. 
 
 ## Install
 
-Download the binary for your platform from the [CLI releases](https://github.com/HemmeligOrg/Hemmelig.app/releases?q=cli-v&expanded=true). The files are `hemmelig-linux-amd64`, `hemmelig-linux-arm64`, `hemmelig-darwin-amd64`, `hemmelig-darwin-arm64` and `hemmelig-windows-amd64.exe`.
+Download the binary for your platform from the [CLI releases](https://github.com/danielsreichenbach/Hemmelig.app/releases?q=cli-v&expanded=true). The files are `hemmelig-linux-amd64`, `hemmelig-linux-arm64`, `hemmelig-darwin-amd64`, `hemmelig-darwin-arm64` and `hemmelig-windows-amd64.exe`.
 
 ```bash
 VERSION=1.1.0
 PLATFORM=linux-amd64
-curl -L "https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${VERSION}/hemmelig-${PLATFORM}" -o hemmelig
+curl -L "https://github.com/danielsreichenbach/Hemmelig.app/releases/download/cli-v${VERSION}/hemmelig-${PLATFORM}" -o hemmelig
 chmod +x hemmelig
 sudo mv hemmelig /usr/local/bin/
 ```
@@ -28,7 +28,7 @@ sudo mv hemmelig /usr/local/bin/
 To verify the download, compare it with the checksum file of the release:
 
 ```bash
-curl -L "https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${VERSION}/checksums.txt" -o checksums.txt
+curl -L "https://github.com/danielsreichenbach/Hemmelig.app/releases/download/cli-v${VERSION}/checksums.txt" -o checksums.txt
 sha256sum -c checksums.txt --ignore-missing
 ```
 
@@ -46,11 +46,11 @@ The npm package `hemmelig` is a smaller Node.js CLI. It creates secrets only. Fo
 ## Quick start
 
 ```bash
-# Create a secret on hemmelig.app. The CLI prints the link.
+# Create a secret on your Hemmelig instance. The CLI prints the link.
 hemmelig "db password: hunter2" --expires 1h
 
 # Open a secret link and print the content.
-hemmelig secrets get "https://hemmelig.app/s/<id>#<key>"
+hemmelig secrets get "https://secrets.example.com/s/<id>#<key>"
 
 # Work with your own instance.
 hemmelig config set url https://secrets.example.com
@@ -76,7 +76,7 @@ The CLI uses the first URL that it finds in this order:
 1. The `--url` flag. The short form is `-u`.
 2. The `HEMMELIG_URL` environment variable.
 3. The `url` value in the config file.
-4. `https://hemmelig.app`.
+4. `https://secrets.example.com`.
 
 ```bash
 hemmelig config set url https://secrets.example.com
@@ -212,7 +212,7 @@ echo "my secret" | hemmelig -e 1h
 ### Read a secret
 
 ```bash
-hemmelig secrets get "https://hemmelig.app/s/<id>#<key>"
+hemmelig secrets get "https://secrets.example.com/s/<id>#<key>"
 ```
 
 `secrets read` is the same command. The CLI prints the content to stdout, and the title and the views left to stderr. It saves attached files in the current folder.
@@ -423,7 +423,7 @@ hemmelig secrets create "token" --json
 ```json
 {
     "id": "3f0c2a4e-6f1b-4c1d-9a55-0a4c8f1e2b7d",
-    "link": "https://hemmelig.app/s/3f0c2a4e-6f1b-4c1d-9a55-0a4c8f1e2b7d#Xo3...",
+    "link": "https://secrets.example.com/s/3f0c2a4e-6f1b-4c1d-9a55-0a4c8f1e2b7d#Xo3...",
     "expiresIn": "1d",
     "views": 1,
     "passwordProtected": false,
@@ -468,7 +468,7 @@ The CLI prints only the link to stdout, so you can capture it in a pipeline. Thi
       HEMMELIG_URL: https://secrets.example.com
       HEMMELIG_API_KEY: ${{ secrets.HEMMELIG_API_KEY }}
   run: |
-      curl -sL https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v1.1.0/hemmelig-linux-amd64 -o hemmelig
+      curl -sL https://github.com/danielsreichenbach/Hemmelig.app/releases/download/cli-v1.1.0/hemmelig-linux-amd64 -o hemmelig
       chmod +x hemmelig
       LINK=$(printf '%s' "${{ secrets.DEPLOY_KEY }}" | ./hemmelig secrets create --title "Deploy key" --expires 1h)
       echo "::add-mask::$LINK"
