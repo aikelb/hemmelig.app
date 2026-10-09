@@ -26,7 +26,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' || !startsWith(github.event.release.tag_name, 'cli-') }}
         env:
             TAG: ${{ github.event.release.tag_name || inputs.tag }}
-            REGISTRY: oci://ghcr.io/hemmeligorg/charts
+            REGISTRY: oci://ghcr.io/${{ github.repository_owner }}/charts
         steps:
             - name: Check the tag
               id: version

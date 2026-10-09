@@ -120,28 +120,28 @@ jobs:
 
             #### Linux (amd64)
             ```bash
-            curl -L https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-linux-amd64 -o hemmelig
+            curl -L https://${{ github.server_url }}/${{ github.repository }}/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-linux-amd64 -o hemmelig
             chmod +x hemmelig
             sudo mv hemmelig /usr/local/bin/
             ```
 
             #### Linux (arm64)
             ```bash
-            curl -L https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-linux-arm64 -o hemmelig
+            curl -L https://${{ github.server_url }}/${{ github.repository }}/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-linux-arm64 -o hemmelig
             chmod +x hemmelig
             sudo mv hemmelig /usr/local/bin/
             ```
 
             #### macOS (Apple Silicon)
             ```bash
-            curl -L https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-darwin-arm64 -o hemmelig
+            curl -L https://${{ github.server_url }}/${{ github.repository }}/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-darwin-arm64 -o hemmelig
             chmod +x hemmelig
             sudo mv hemmelig /usr/local/bin/
             ```
 
             #### macOS (Intel)
             ```bash
-            curl -L https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-darwin-amd64 -o hemmelig
+            curl -L https://${{ github.server_url }}/${{ github.repository }}/releases/download/cli-v${{ steps.version.outputs.version }}/hemmelig-darwin-amd64 -o hemmelig
             chmod +x hemmelig
             sudo mv hemmelig /usr/local/bin/
             ```
@@ -153,7 +153,7 @@ jobs:
 
             ```bash
             # Download checksums
-            curl -L https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v${{ steps.version.outputs.version }}/checksums.txt -o checksums.txt
+            curl -L https://${{ github.server_url }}/${{ github.repository }}/releases/download/cli-v${{ steps.version.outputs.version }}/checksums.txt -o checksums.txt
 
             # Verify (Linux/macOS)
             sha256sum -c checksums.txt --ignore-missing
@@ -167,4 +167,4 @@ jobs:
             cat file.txt | hemmelig
             ```
 
-            See the [CLI documentation](https://github.com/HemmeligOrg/Hemmelig.app/blob/main/docs/cli.md) for more options.
+            See the [CLI documentation](https://${{ github.server_url }}/${{ github.repository }}/blob/main/docs/cli.md) for more options.
