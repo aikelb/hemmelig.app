@@ -3,7 +3,7 @@
 replicaCount: 1
 
 image:
-  repository: hemmeligapp/hemmelig
+  repository: ghcr.io/hemmeligorg/hemmelig # Override for forks: --set image.repository=ghcr.io/<your-namespace>/hemmelig
   tag: "v7"
   pullPolicy: IfNotPresent
 

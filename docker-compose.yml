@@ -1,6 +1,6 @@
 services:
     hemmelig:
-        image: hemmeligapp/hemmelig:v7
+        image: ghcr.io/<your-namespace>/hemmelig:v7 # Replace <your-namespace> with your GHCR namespace (e.g. danielsreichenbach)
         container_name: hemmelig
         restart: unless-stopped
         volumes:
