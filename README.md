@@ -1,11 +1,4 @@
-> [!IMPORTANT]
-> **This repository is archived.** It is read-only and gets no more fixes, features, or releases.
->
-> Feel free to fork it and continue the work. Forks keep the terms of the [O'Saasy License](LICENSE).
->
-> The hosted service at [hemmelig.app](https://hemmelig.app) continues to run. It now develops in its own direction, separate from this repository.
->
-> Thank you to everyone who contributed code, translations, bug reports, and ideas.
+> **Note:** This fork is maintained and updated exclusively for use in my personal homelab. It is not a community project — contributions are welcome as issues or PRs, but development follows my own needs.
 
 <div align="center">
   <img src="banner.png" alt="hemmelig" />
@@ -18,20 +11,18 @@
 </p>
 
 <p align="center">
-  <a href="https://hemmelig.app">Try it online</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="docs/docker.md">Docker Guide</a> •
   <a href="docs/env.md">Configuration</a>
 </p>
 
 <p align="center">
-  <a href="https://hub.docker.com/r/hemmeligapp/hemmelig"><img src="https://img.shields.io/docker/pulls/hemmeligapp/hemmelig" alt="Docker pulls" /></a>
-  <a href="https://ko-fi.com/bjarneoeverli"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white" alt="Buy Me a Coffee" /></a>
+  <a href="https://github.com/danielsreichenbach/Hemmelig.app/pkgs/container/hemmelig"><img src="https://img.shields.io/badge/GHCR-available-blue" alt="GHCR image" /></a>
 </p>
 
 ## How It Works
 
-1. Enter your secret on [hemmelig.app](https://hemmelig.app) or your self-hosted instance
+1. Create a secret using the web app, CLI, or API of your self-hosted instance
 2. Set expiration time, view limits, and optional password
 3. Share the generated link with your recipient
 4. The secret is automatically deleted after being viewed or expired
@@ -69,7 +60,7 @@ docker run -d \
 ### Docker Compose
 
 ```bash
-git clone https://github.com/HemmeligOrg/Hemmelig.app.git
+git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
 
 # Edit docker-compose.yml with your settings
@@ -84,14 +75,14 @@ The `hemmelig` CLI does all that the web app does, with the access of your accou
 
 ```bash
 # Download the binary for Linux on amd64. Other platforms are in docs/cli.md.
-curl -L https://github.com/HemmeligOrg/Hemmelig.app/releases/download/cli-v1.1.0/hemmelig-linux-amd64 -o hemmelig
+curl -L https://github.com/danielsreichenbach/Hemmelig.app/releases/download/cli-v1.1.0/hemmelig-linux-amd64 -o hemmelig
 chmod +x hemmelig
 
 # Create a secret and print the link.
 ./hemmelig "API key: sk-1234" -t "Production API Key" -e 7d -v 3
 
 # Read a secret, then work with your own instance.
-./hemmelig secrets get "https://hemmelig.app/s/<id>#<key>"
+./hemmelig secrets get "https://secrets.example.com/s/<id>#<key>"
 ./hemmelig login --url https://secrets.example.com
 ./hemmelig admin users list --json
 ```
@@ -133,12 +124,9 @@ npm run dev
 npm run dev:api
 ```
 
-## Hetzner Cloud Referral
-
-Hemmelig is proudly hosted on [Hetzner Cloud](https://hetzner.cloud/?ref=Id028KbCZQoD). Hetzner provides reliable and scalable cloud solutions, making it an ideal choice for hosting secure applications like Hemmelig. By using our [referral link](https://hetzner.cloud/?ref=Id028KbCZQoD), you can join Hetzner Cloud and receive €20/$20 in credits. Once you spend at least €10/$10 (excluding credits), Hemmelig will receive €10/$10 in Hetzner Cloud credits. This is a great opportunity to explore Hetzner's services while supporting Hemmelig.
-
 ## License
 
 O'Saasy License Agreement - Copyright © 2025, Bjarne Øverli.
 
 This project is licensed under a modified MIT license that prohibits using the software to compete with the original licensor as a hosted SaaS product. See [LICENSE](LICENSE) for details.
+This fork retains the same license terms.
