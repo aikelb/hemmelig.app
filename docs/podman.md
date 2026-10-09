@@ -1,22 +1,22 @@
-# Docker Deployment
+# Podman Deployment
 
-Complete guide for deploying Hemmelig using Docker.
+Complete guide for deploying Hemmelig using Podman.
 
 ## Architecture Support
 
-Hemmelig Docker images are built for multiple architectures:
+Hemmelig container images are built for multiple architectures:
 
 | Architecture  | Supported | Use Case                                     |
 | ------------- | --------- | -------------------------------------------- |
 | `linux/amd64` | Yes       | Intel/AMD servers, most cloud providers      |
 | `linux/arm64` | Yes       | Apple Silicon, AWS Graviton, Raspberry Pi 4+ |
 
-Docker will automatically pull the correct image for your platform.
+Podman will automatically pull the correct image for your platform.
 
 ## Quick Start
 
 ```bash
-docker run -d \
+podman run -d \
   --name hemmelig \
   -p 3000:3000 \
   -v hemmelig-data:/app/database \
@@ -24,12 +24,12 @@ docker run -d \
   -e DATABASE_URL="file:/app/database/hemmelig.db" \
   -e BETTER_AUTH_SECRET="your-secret-key-min-32-chars" \
   -e BETTER_AUTH_URL="https://your-domain.com" \
-  hemmeligapp/hemmelig:v7
+  ghcr.io/hemmeligapp/hemmelig:v7
 ```
 
-## Docker Compose
+## Podman Compose
 
-The repository includes a ready-to-use `docker-compose.yml`:
+The repository includes a ready-to-use `podman-compose.yml`:
 
 ```bash
 # Clone the repository
@@ -37,20 +37,20 @@ git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
 
 # Edit environment variables
-nano docker-compose.yml
+nano podman-compose.yml
 
 # Start the application
-docker compose up -d
+podman compose up -d
 ```
 
 ### Configuration
 
-The included `docker-compose.yml` uses SQLite:
+The included `podman-compose.yml` uses SQLite:
 
 ```yaml
 services:
     hemmelig:
-        image: hemmeligapp/hemmelig:v7
+        image: ghcr.io/hemmeligapp/hemmelig:v7
         container_name: hemmelig
         restart: unless-stopped
         volumes:
@@ -93,7 +93,7 @@ Then update the following:
 
 ## Easypanel
 
-[Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform, and Hemmelig has a one-click deployment template there: https://easypanel.io/templates/hemmelig - it generates `BETTER_AUTH_SECRET` and sets up the database/uploads volumes for you automatically.
+[Easypanel](https://easypanel.io) is a self-hosted container deployment platform, and Hemmelig has a one-click deployment template there: https://easypanel.io/templates/hemmelig - it generates `BETTER_AUTH_SECRET` and sets up the database/uploads volumes for you automatically.
 
 ## Volume Mounts
 
@@ -111,10 +111,10 @@ Keep these paths writable:
 - `/app/database` and `/app/uploads`, as volumes.
 - `/tmp`, as a `tmpfs` or an `emptyDir`. The TypeScript runtime and npm write temporary files there.
 
-With Docker:
+With Podman:
 
 ```bash
-docker run -d \
+podman run -d \
   --name hemmelig \
   --read-only \
   --tmpfs /tmp \
@@ -123,7 +123,7 @@ docker run -d \
   -e BETTER_AUTH_SECRET="$(openssl rand -base64 32)" \
   -e BETTER_AUTH_URL=https://secrets.example.com \
   -p 3000:3000 \
-  hemmeligapp/hemmelig:v7
+  ghcr.io/hemmeligapp/hemmelig:v7
 ```
 
 With Kubernetes:
@@ -131,7 +131,7 @@ With Kubernetes:
 ```yaml
 containers:
     - name: hemmelig
-      image: hemmeligapp/hemmelig:v7
+      image: ghcr.io/hemmeligapp/hemmelig:v7
       securityContext:
           readOnlyRootFilesystem: true
       volumeMounts:
@@ -187,7 +187,7 @@ sudo mkdir -p ./database ./uploads
 sudo chown -R $(id -u):$(id -g) ./database ./uploads
 ```
 
-Or use Docker named volumes instead of bind mounts:
+Or use Podman named volumes instead of bind mounts:
 
 ```yaml
 volumes:
@@ -206,16 +206,16 @@ chmod 755 ./uploads
 
 ### Container User
 
-The Hemmelig container runs as user `bun` (non-root) for security. When using bind mounts, ensure the host directories are writable by UID 1000 (the default `bun` user in the container).
+The Hemmelig container runs as user `app` (non-root) for security. When using bind mounts, ensure the host directories are writable by UID 1000 (the default `app` user in the container).
 
 ## Building from Source
 
-To build the Docker image locally:
+To build the container image locally:
 
 ```bash
 git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
-docker build -t hemmelig .
+podman build --format docker -t hemmelig .
 ```
 
 ### Building for ARM64
@@ -223,17 +223,21 @@ docker build -t hemmelig .
 To build for ARM64 (e.g., for Apple Silicon or AWS Graviton):
 
 ```bash
-# Set up Docker buildx with multi-architecture support
-docker buildx create --name multiarch --driver docker-container --use
-
 # Build for ARM64
-docker buildx build --platform linux/arm64 -t hemmelig:arm64 --load .
+podman build --format docker --platform linux/arm64 -t hemmelig:arm64 .
 
-# Build for both architectures
-docker buildx build --platform linux/amd64,linux/arm64 -t hemmelig:latest --push .
+# Build for both architectures and push to a registry
+podman build --format docker --platform linux/amd64,linux/arm64 -t ghcr.io/your-namespace/hemmelig:latest --push .
 ```
 
-The Dockerfile uses a cross-compilation strategy where Prisma client generation runs on the build host's native architecture to avoid QEMU emulation issues.
+The Dockerfile uses a cross-compilation strategy where Prisma client generation runs on the build host's native architecture to avoid QEMU emulation issues. Podman supports multi-platform builds natively without needing a separate buildx setup.
+
+### Pushing a Local Build
+
+```bash
+podman tag hemmelig ghcr.io/your-namespace/hemmelig:v7
+podman push ghcr.io/your-namespace/hemmelig:v7
+```
 
 ## Reverse Proxy
 
@@ -308,11 +312,11 @@ curl http://localhost:3000/api/health/ready
 
 ```bash
 # Pull latest image
-docker pull hemmeligapp/hemmelig:v7
+podman pull ghcr.io/hemmeligapp/hemmelig:v7
 
 # Recreate container
-docker compose down
-docker compose up -d
+podman compose down
+podman compose up -d
 ```
 
 Database migrations run automatically on startup.

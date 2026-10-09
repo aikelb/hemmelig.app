@@ -102,12 +102,12 @@ HEMMELIG_ALLOWED_EMAIL_DOMAINS="company.com,partner.com"
 | `HEMMELIG_METRICS_ENABLED` | Enable Prometheus metrics endpoint | `false` |
 | `HEMMELIG_METRICS_SECRET`  | Bearer token for `/api/metrics`    | `""`    |
 
-## Docker Compose Example
+## Podman Compose Example
 
 ```yaml
 services:
     hemmelig:
-        image: hemmeligapp/hemmelig:v7
+        image: ghcr.io/hemmeligapp/hemmelig:v7
         restart: unless-stopped
         ports:
             - '3000:3000'
@@ -273,7 +273,7 @@ Simply remove or set `HEMMELIG_MANAGED=false`. Settings will be read from the da
 
 1. **Use secrets management** - Store sensitive values like `HEMMELIG_WEBHOOK_SECRET` and `HEMMELIG_METRICS_SECRET` in a secrets manager (Vault, AWS Secrets Manager, etc.)
 
-2. **Version control your config** - Keep your docker-compose or Kubernetes manifests in git
+2. **Version control your config** - Keep your podman-compose or Kubernetes manifests in git
 
 3. **Use CI/CD for changes** - Deploy configuration changes through your pipeline, not manual edits
 

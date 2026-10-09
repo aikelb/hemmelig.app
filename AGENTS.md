@@ -292,7 +292,7 @@ When `HEMMELIG_MANAGED=true`, instance settings are controlled via environment v
 
 ## Documentation
 
-User-facing docs live in `docs/`: encryption, env vars, docker, helm, social login, webhooks, API, CLI, MCP server, upgrade path. Reference these before implementing features they cover.
+User-facing docs live in `docs/`: encryption, env vars, podman deployment, helm, social login, webhooks, API, CLI, MCP server, upgrade path. Reference these before implementing features they cover.
 
 ---
 

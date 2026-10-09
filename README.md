@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="#quick-start">Quick Start</a> •
-  <a href="docs/docker.md">Docker Guide</a> •
+  <a href="docs/podman.md">Podman Guide</a> •
   <a href="docs/env.md">Configuration</a>
 </p>
 
@@ -43,10 +43,10 @@
 
 ## Quick Start
 
-### Docker (Recommended)
+### Podman (Recommended)
 
 ```bash
-docker run -d \
+podman run -d \
   --name hemmelig \
   -p 3000:3000 \
   -v hemmelig-data:/app/database \
@@ -54,20 +54,20 @@ docker run -d \
   -e DATABASE_URL="file:/app/database/hemmelig.db" \
   -e BETTER_AUTH_SECRET="$(openssl rand -base64 32)" \
   -e BETTER_AUTH_URL="https://your-domain.com" \
-  hemmelig/hemmelig:v7
+  ghcr.io/hemmeligapp/hemmelig:v7
 ```
 
-### Docker Compose
+### Podman Compose
 
 ```bash
 git clone https://github.com/danielsreichenbach/Hemmelig.app.git
 cd Hemmelig.app
 
-# Edit docker-compose.yml with your settings
-docker compose up -d
+# Edit podman-compose.yml with your settings
+podman compose up -d
 ```
 
-See [Docker Guide](docs/docker.md) for detailed deployment instructions.
+See [Podman Guide](docs/podman.md) for detailed deployment instructions.
 
 ### CLI
 
@@ -98,7 +98,7 @@ HEMMELIG_API_KEY=hemmelig_xxxxxxxxxxxxxxxx ./hemmelig mcp
 
 ## Documentation
 
-- [Docker Deployment](docs/docker.md) - Complete Docker setup guide
+- [Podman Deployment](docs/podman.md) - Complete container setup guide
 - [Helm Chart](docs/helm.md) - Kubernetes deployment with Helm
 - [Environment Variables](docs/env.md) - All configuration options
 - [Managed Mode](docs/managed.md) - Configure instance settings via environment variables

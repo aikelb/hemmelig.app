@@ -22,7 +22,7 @@
 
 1. **Backup v6 data** (for reference only - it cannot be migrated)
 2. **Stop your v6 instance**
-3. **Deploy v7 with a fresh database** - See [Docker Guide](docker.md) for deployment instructions
+3. **Deploy v7 with a fresh database** - See [Podman Guide](podman.md) for deployment instructions
 4. **Re-create user accounts**
 5. **Inform users** that existing secrets are no longer accessible
 
