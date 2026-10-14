@@ -2,6 +2,12 @@ name: Publish Docker image
 on:
     release:
         types: [published]
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: 'Release tag to publish, for example v7.7.0'
+                required: true
+                type: string
 permissions:
     contents: read
     packages: write
@@ -9,6 +15,8 @@ jobs:
     push_to_registry:
         name: Push Docker image to GHCR
         runs-on: ubuntu-latest
+        env:
+            TAG: ${{ github.event.release.tag_name || inputs.tag }}
         steps:
             - name: Check out the repo
               uses: actions/checkout@v6
@@ -26,12 +34,6 @@ jobs:
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Get latest git tag
-              id: latest_tag
-              uses: 'WyriHaximus/github-action-get-previous-tag@v2'
-              with:
-                  fallback: no-tag
-
             - name: Get short SHA
               id: short_sha
               run: echo "sha=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
@@ -39,12 +41,12 @@ jobs:
             - name: Get major version
               id: major_version
               run: |
-                  echo "version=$(echo ${{ steps.latest_tag.outputs.tag }} | cut -d'.' -f1)" >> $GITHUB_OUTPUT
+                  echo "version=$(echo "$TAG" | cut -d'.' -f1)" >> $GITHUB_OUTPUT
 
             - name: Get minor version
               id: minor_version
               run: |
-                  echo "version=$(echo ${{ steps.latest_tag.outputs.tag }} | cut -d'.' -f1,2)" >> $GITHUB_OUTPUT
+                  echo "version=$(echo "$TAG" | cut -d'.' -f1,2)" >> $GITHUB_OUTPUT
 
             - name: Build and push multi-arch image
               uses: docker/build-push-action@v7
@@ -53,11 +55,11 @@ jobs:
                   platforms: linux/amd64,linux/arm64
                   push: true
                   tags: |
-                      ghcr.io/${{ github.repository_owner }}/hemmelig:${{ steps.latest_tag.outputs.tag }}
+                      ghcr.io/${{ github.repository_owner }}/hemmelig:${{ env.TAG }}
                       ghcr.io/${{ github.repository_owner }}/hemmelig:${{ steps.minor_version.outputs.version }}
                       ghcr.io/${{ github.repository_owner }}/hemmelig:${{ steps.major_version.outputs.version }}
                   build-args: |
                       GIT_SHA=${{ steps.short_sha.outputs.sha }}
-                      GIT_TAG=${{ steps.latest_tag.outputs.tag }}
+                      GIT_TAG=${{ env.TAG }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
