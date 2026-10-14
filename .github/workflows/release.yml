@@ -80,14 +80,15 @@ jobs:
                   } >> $GITHUB_OUTPUT
 
             - name: Update Release Notes
-              uses: softprops/action-gh-release@v2.6.1
-              with:
-                  tag_name: ${{ github.event.release.tag_name }}
-                  body: |
-                      ## What's Changed
-
-                      ${{ steps.commits.outputs.list }}
-
-                      **Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ steps.prev_tag.outputs.tag }}...${{ github.event.release.tag_name }}
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  # Write body to a file to avoid ARG_MAX limits with large commit lists
+                  {
+                      echo "## What's Changed"
+                      echo ""
+                      echo "${{ steps.commits.outputs.list }}"
+                      echo ""
+                      echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ steps.prev_tag.outputs.tag }}...${{ github.event.release.tag_name }}"
+                  } > release-notes.md
+                  gh release edit "${{ github.event.release.tag_name }}" --notes-file release-notes.md
